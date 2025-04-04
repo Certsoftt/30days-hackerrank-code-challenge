@@ -1,0 +1,25 @@
+name: 30 days Code Challenge
+env:
+    DEFAULT_BRANCH: main
+    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+on:
+    push:
+        branches:
+            - "main"
+    pull_request:
+        branches:
+            - "main"
+jobs:
+    check:
+        name: Check code base
+        runs-on: ubuntu-latest
+        container:
+            'image': node:20
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - run: echo "Checked Code"
+            - name: Run Super-Linter
+              uses: github/super-linter@v3
+            - run: echo "Run Super-Linter"
+
